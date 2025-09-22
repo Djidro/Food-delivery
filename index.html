@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodExpress - Food Delivery App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login/Registration Screen -->
+        <div id="login-screen" class="screen active">
+            <header>
+                <h1>FoodExpress</h1>
+                <p>Delicious food delivered fast</p>
+            </header>
+            
+            <div class="login-container">
+                <div class="user-type-selector">
+                    <button class="user-type-btn active" data-type="customer">Customer</button>
+                    <button class="user-type-btn" data-type="restaurant">Restaurant</button>
+                    <button class="user-type-btn" data-type="driver">Driver</button>
+                    <button class="user-type-btn" data-type="admin">Admin</button>
+                </div>
+                
+                <form id="login-form">
+                    <div id="customer-login" class="login-form active">
+                        <h2>Customer Login</h2>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                        <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+                    </div>
+                    
+                    <div id="restaurant-login" class="login-form">
+                        <h2>Restaurant Login</h2>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </div>
+                    
+                    <div id="driver-login" class="login-form">
+                        <h2>Driver Login</h2>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </div>
+                    
+                    <div id="admin-login" class="login-form">
+                        <h2>Admin Login</h2>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+                
+                <form id="register-form" class="hidden">
+                    <h2>Customer Registration</h2>
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <textarea placeholder="Default Delivery Address" required></textarea>
+                    <button type="submit">Register</button>
+                    <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Customer Dashboard -->
+        <div id="customer-dashboard" class="screen">
+            <header>
+                <button id="customer-logout" class="logout-btn">Logout</button>
+                <h1>FoodExpress</h1>
+                <div class="user-info">
+                    <span id="customer-name">John Doe</span>
+                </div>
+            </header>
+            
+            <nav class="customer-nav">
+                <button class="nav-btn active" data-section="restaurants">Restaurants</button>
+                <button class="nav-btn" data-section="cart">Cart (<span id="cart-count">0</span>)</button>
+                <button class="nav-btn" data-section="tracking">Order Tracking</button>
+                <button class="nav-btn" data-section="history">Order History</button>
+            </nav>
+            
+            <main>
+                <section id="restaurants-section" class="section active">
+                    <div class="search-filters">
+                        <input type="text" id="restaurant-search" placeholder="Search restaurants...">
+                        <select id="cuisine-filter">
+                            <option value="">All Cuisines</option>
+                            <option value="italian">Italian</option>
+                            <option value="mexican">Mexican</option>
+                            <option value="chinese">Chinese</option>
+                            <option value="indian">Indian</option>
+                        </select>
+                        <select id="sort-by">
+                            <option value="rating">Rating</option>
+                            <option value="distance">Distance</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                    
+                    <div id="restaurants-list" class="cards-container">
+                        <!-- Restaurants will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="menu-section" class="section">
+                    <button id="back-to-restaurants" class="back-btn">← Back to Restaurants</button>
+                    <div id="restaurant-details">
+                        <h2 id="restaurant-name"></h2>
+                        <p id="restaurant-info"></p>
+                    </div>
+                    
+                    <div id="menu-items" class="cards-container">
+                        <!-- Menu items will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="cart-section" class="section">
+                    <h2>Your Cart</h2>
+                    <div id="cart-items">
+                        <!-- Cart items will be populated by JavaScript -->
+                    </div>
+                    <div id="cart-summary">
+                        <p>Subtotal: $<span id="subtotal">0.00</span></p>
+                        <p>Delivery Fee: $<span id="delivery-fee">2.99</span></p>
+                        <p>Total: $<span id="total">0.00</span></p>
+                        <button id="checkout-btn" disabled>Proceed to Checkout</button>
+                    </div>
+                </section>
+                
+                <section id="checkout-section" class="section">
+                    <h2>Checkout</h2>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label>Delivery Address</label>
+                            <textarea id="delivery-address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <select id="payment-method">
+                                <option value="credit">Credit Card</option>
+                                <option value="debit">Debit Card</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+                        <button type="submit">Place Order</button>
+                    </form>
+                </section>
+                
+                <section id="tracking-section" class="section">
+                    <h2>Order Tracking</h2>
+                    <div id="active-orders">
+                        <!-- Active orders will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="history-section" class="section">
+                    <h2>Order History</h2>
+                    <div id="order-history">
+                        <!-- Order history will be populated by JavaScript -->
+                    </div>
+                </section>
+            </main>
+        </div>
+        
+        <!-- Restaurant Dashboard -->
+        <div id="restaurant-dashboard" class="screen">
+            <header>
+                <button id="restaurant-logout" class="logout-btn">Logout</button>
+                <h1>Restaurant Dashboard</h1>
+                <div class="user-info">
+                    <span id="restaurant-account-name">Pizza Palace</span>
+                </div>
+            </header>
+            
+            <nav class="restaurant-nav">
+                <button class="nav-btn active" data-section="orders">Orders</button>
+                <button class="nav-btn" data-section="menu">Menu Management</button>
+                <button class="nav-btn" data-section="restaurant-analytics">Analytics</button>
+            </nav>
+            
+            <main>
+                <section id="orders-section" class="section active">
+                    <h2>Incoming Orders</h2>
+                    <div id="orders-list">
+                        <!-- Orders will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="menu-section-restaurant" class="section">
+                    <h2>Menu Management</h2>
+                    <button id="add-menu-item" class="add-btn">+ Add Menu Item</button>
+                    <div id="menu-items-restaurant">
+                        <!-- Menu items will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="restaurant-analytics-section" class="section">
+                    <h2>Analytics</h2>
+                    <div class="analytics-cards">
+                        <div class="analytics-card">
+                            <h3>Today's Orders</h3>
+                            <p class="stat">12</p>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Revenue</h3>
+                            <p class="stat">$245.50</p>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Average Rating</h3>
+                            <p class="stat">4.2/5</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        
+        <!-- Driver Dashboard -->
+        <div id="driver-dashboard" class="screen">
+            <header>
+                <button id="driver-logout" class="logout-btn">Logout</button>
+                <h1>Driver Dashboard</h1>
+                <div class="user-info">
+                    <span id="driver-name">Mike Driver</span>
+                </div>
+            </header>
+            
+            <nav class="driver-nav">
+                <button class="nav-btn active" data-section="available-orders">Available Orders</button>
+                <button class="nav-btn" data-section="current-delivery">Current Delivery</button>
+                <button class="nav-btn" data-section="driver-history">Delivery History</button>
+            </nav>
+            
+            <main>
+                <section id="available-orders-section" class="section active">
+                    <h2>Available Delivery Requests</h2>
+                    <div id="delivery-requests">
+                        <!-- Delivery requests will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="current-delivery-section" class="section">
+                    <h2>Current Delivery</h2>
+                    <div id="delivery-details">
+                        <!-- Delivery details will be populated by JavaScript -->
+                    </div>
+                    <div class="delivery-actions">
+                        <button id="picked-up-btn">Mark as Picked Up</button>
+                        <button id="delivered-btn">Mark as Delivered</button>
+                    </div>
+                </section>
+                
+                <section id="driver-history-section" class="section">
+                    <h2>Delivery History</h2>
+                    <div id="delivery-history">
+                        <!-- Delivery history will be populated by JavaScript -->
+                    </div>
+                </section>
+            </main>
+        </div>
+        
+        <!-- Admin Dashboard -->
+        <div id="admin-dashboard" class="screen">
+            <header>
+                <button id="admin-logout" class="logout-btn">Logout</button>
+                <h1>Admin Dashboard</h1>
+            </header>
+            
+            <nav class="admin-nav">
+                <button class="nav-btn active" data-section="user-management">User Management</button>
+                <button class="nav-btn" data-section="order-overview">Order Overview</button>
+                <button class="nav-btn" data-section="analytics">Analytics</button>
+                <button class="nav-btn" data-section="support">Customer Support</button>
+                <button class="nav-btn" data-section="settings">System Settings</button>
+            </nav>
+            
+            <main>
+                <section id="user-management-section" class="section active">
+                    <h2>User Management</h2>
+                    <div class="user-tabs">
+                        <button class="user-tab active" data-user-type="customers">Customers</button>
+                        <button class="user-tab" data-user-type="restaurants">Restaurants</button>
+                        <button class="user-tab" data-user-type="drivers">Drivers</button>
+                    </div>
+                    
+                    <div id="customers-list" class="user-list">
+                        <!-- Customers will be populated by JavaScript -->
+                    </div>
+                    
+                    <div id="restaurants-list-admin" class="user-list hidden">
+                        <!-- Restaurants will be populated by JavaScript -->
+                    </div>
+                    
+                    <div id="drivers-list" class="user-list hidden">
+                        <!-- Drivers will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="order-overview-section" class="section">
+                    <h2>Order Overview</h2>
+                    <div id="all-orders">
+                        <!-- All orders will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="analytics-section" class="section">
+                    <h2>Analytics</h2>
+                    <div class="analytics-cards">
+                        <div class="analytics-card">
+                            <h3>Total Orders</h3>
+                            <p class="stat">1,245</p>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Active Users</h3>
+                            <p class="stat">543</p>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Avg Delivery Time</h3>
+                            <p class="stat">32 min</p>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Revenue</h3>
+                            <p class="stat">$24,567</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="support-section" class="section">
+                    <h2>Customer Support</h2>
+                    <div id="support-tickets">
+                        <!-- Support tickets will be populated by JavaScript -->
+                    </div>
+                </section>
+                
+                <section id="settings-section" class="section">
+                    <h2>System Settings</h2>
+                    <form id="system-settings">
+                        <div class="form-group">
+                            <label>Delivery Fee</label>
+                            <input type="number" id="delivery-fee-setting" value="2.99" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Service Fee (%)</label>
+                            <input type="number" id="service-fee" value="5" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Tax Rate (%)</label>
+                            <input type="number" id="tax-rate" value="8.5" step="0.1">
+                        </div>
+                        <button type="submit">Save Settings</button>
+                    </form>
+                </section>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="item-customization-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Customize Your Order</h2>
+            <div id="customization-options">
+                <!-- Customization options will be populated by JavaScript -->
+            </div>
+            <button id="add-to-cart-btn">Add to Cart</button>
+        </div>
+    </div>
+    
+    <div id="order-status-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Order Status</h2>
+            <div id="order-status-content">
+                <!-- Order status will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="data/mockData.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/customer.js"></script>
+    <script src="js/restaurant.js"></script>
+    <script src="js/driver.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
