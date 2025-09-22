@@ -1,0 +1,157 @@
+/* Customer-specific styles */
+
+/* Restaurant Cards */
+.restaurant-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.restaurant-rating {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.rating-stars {
+    color: #ffc107;
+    margin-right: 0.5rem;
+}
+
+.restaurant-distance {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Menu Items */
+.menu-item-card {
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.menu-item-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.menu-item-info {
+    flex: 1;
+}
+
+.menu-item-price {
+    font-weight: bold;
+    color: #ff6b6b;
+    font-size: 1.2rem;
+}
+
+/* Cart Summary */
+#cart-summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 1rem;
+}
+
+#cart-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+#cart-summary #total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+/* Order Tracking Map */
+.tracking-map {
+    height: 200px;
+    background: #e9ecef;
+    border-radius: 8px;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+/* Order History */
+.order-history-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.order-history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.order-history-restaurant {
+    font-weight: bold;
+}
+
+.order-history-date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.order-history-items {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.order-history-total {
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+.reorder-btn {
+    background: #28a745;
+    margin-top: 0.5rem;
+}
+
+.reorder-btn:hover {
+    background: #218838;
+}
+
+/* Customization Options */
+.customization-option {
+    margin-bottom: 1rem;
+}
+
+.customization-option h4 {
+    margin-bottom: 0.5rem;
+}
+
+.option-choice {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.option-choice input {
+    margin: 0 0.5rem 0 0;
+    width: auto;
+}
+
+.special-instructions {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
